@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
 import { MercadoPagoConfig, Preference } from "mercadopago";
+import "dotenv/config";
 
 const client = new MercadoPagoConfig({
-  accessToken:
-    "APP_USR-6527483234040378-051320-2f0f96638dc4478e1cf490e60f4de012-2440052756",
+  accessToken:process.env.MERCADOPAGO_ACCESS_TOKEN,
 });
 
 const app = express();
@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/create_preference", async (req, res) => {
+
   try {
     const { products } = req.body;
 
@@ -46,7 +47,7 @@ app.post("/create_preference", async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      error: error,
+      error: error
     });
   }
 });
